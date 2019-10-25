@@ -1,14 +1,17 @@
 # use an existing docker image as a base
-FROM node:alpine
+FROM node:alpine as builder
 
-WORKDIR /app
+WORKDIR '/app'
 
 # download and install a dependency
 #RUN apk add --update redis
 COPY package.json .
 RUN npm install
 COPY . .
-
+RUN npm run build
 # Tell the image what to do when it starts as a container
 #CMD ["redis-server"]
-CMD ["npm", "start"]
+# CMD ["npm", "start"]
+
+FROM nginx
+COPY --from=builder /app/build /usr/share/nginx/html
