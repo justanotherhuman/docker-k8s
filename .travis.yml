@@ -11,7 +11,7 @@ script:
 deploy:
   provider: elasticbeanstalk
   region: "us-east-2"
-  app: "docker-kubernets"
+  app: "docker-kubernetes"
   env: "DockerKubernetes-env"
   bucket_name: "elasticbeanstalk-us-east-2-700753984985"
   bucket_path: "docker-kubernetes"
